@@ -1,0 +1,75 @@
+
+
+
+
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Encuentra la Palabra Oculta</title>
+            <style>
+        
+            </style>
+        </head>
+        <body>
+            <h3>find the</h3>
+            <h1>Hidden Word</h1>
+            <p id="word"></p>
+        <p>tries <span id="tries">0</span>/6</p> <p>mistakes <span id="mistakes"></span></p>
+            <input type="text" id="input" placeholder="Enter a letter">
+            <button onclick="checkLetter()">Verify</button>
+            <button onclick="generateWord()"> Random</button>
+            <h2 id="message"></h2>
+            <script>
+        let hiddenword= '';
+        let tries=0
+        let mistakes=[]
+        
+        const words = ["javascript", "html", "code", "internet"];
+        
+        let letters=[];
+        
+        const generateWord = () => {
+            hiddenword = words[Math.floor(Math.random() * words.length)];
+             letters = hiddenword.split("",hiddenword.length);
+             let letras=letters.copyWithin(letters.length);
+             let hiddenletters=letras.fill("_");
+                    document.getElementById("word").textContent = hiddenletters;
+                    document.getElementById("input").value = "";
+                    document.getElementById("message").textContent = "";
+                };
+        
+        
+        const checkLetter = () => {
+                    const userInput = document.getElementById("input").value.trim().toLowerCase();
+                  let incorrectword=true;
+                  let answer= letters.includes(userInput);
+
+                     if (answer===true) {
+                        document.getElementById("word").textContent = "que complete la letra";
+                        incorrectword=false;
+                        
+                    }
+                    if(incorrectword===true){
+                        incorrectword;
+                        mistakes.push(userInput)
+                        tries++;
+                    }
+                    document.getElementById("tries").textContent = tries;
+                    document.getElementById("mistakes").textContent = mistakes;
+                };
+        
+                
+        
+        if (tries==0) {
+            document.getElementById("message").textContent="💀 Game Over"
+        }
+
+        
+        window.onload = generateWord;
+            </script>
+        </body>
+        </html>
+        
+       
